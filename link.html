@@ -10,37 +10,103 @@
 	  <noscript>You need to enable JavaScript to run this app.</noscript>
 		<div class="left">
 		<h2>UESTC后台管理系统</h2>
-    <div class="content">
+    <div class="content" id="leftct">
       <table>
 	      <tr>
-		      <td>投票账户<span>></span>
-			      <ul>
-				      <li class="list">上传Excel导入</li>
-				      <li class="list">单独添加、删除</li>
-			      </ul>
-			    </td>
+		      <td id="account">投票账户</td>
 	      </tr>
 	      <tr>
-		      <td>候选人物<span>></span>
-		        <ul>
-				      <li class="list">添加候选人/物信息</li>
-			      </ul>
-		      </td>
+		      <td id="candidate">候选人物</td>
 	      </tr>
 	      <tr>
-		      <td>投票设置<span>></span>
+		      <td id="vote">投票设置<span>></span>
 		        <ul>
-				      <li class="list">投票时间段设置</li>
-				      <li class="list">投票结果展示</li>
-				      <li class="list">投票公告编辑</li>
-				      <li class="list">投票逻辑设置</li>
+				      <li class="list" id="votetime">投票时间段设置</li>
+				      <li class="list" id="voteresult">投票结果展示</li>
+				      <li class="list" id="voteannounce">投票公告编辑</li>
+				      <li class="list" id="votelogic">投票逻辑设置</li>
 			      </ul>
 			    </td>
 	      </tr>
       </table>
     </div>
 		</div>
-		<div class="right"></div>
+		<div class="right" id="right">
+		  <div id="customcontent" class="content">
+		    <button id="exc">上传Excel导入</button>
+		    <button id="alone">单独添加、删除</button>
+		    <div id="customlist">
+		      <table>
+		        <thead>
+		          <td>姓名</td>
+		          <td>password</td>
+		          <td>操作</td>
+		        </thead>
+		        <tr>
+		          <td>姓名</td>
+		          <td>password</td>
+		          <td>操作</td>
+		        </tr>
+		      </table>
+		    </div>
+		  </div>
+		  <div id="candidatecontent" class="content">
+		    <button id="candidatemsg">添加候选人/物信息</button>
+		    <table>
+		        <thead>
+		          <td>姓名</td>
+		          <td>信息</td>
+		          <td>操作</td>
+		        </thead>
+		        <tr>
+		          <td>姓名</td>
+		          <td>信息</td>
+		          <td>操作</td>
+		        </tr>
+		      </table>
+		  </div>
+		  <div id="votetimect" class="content">
+		    <table>
+		        <thead>
+		          <td>时间</td>
+		          <td>时间</td>
+		          <td>时间</td>
+		        </thead>
+		        <tr>
+		          <td>时间</td>
+		          <td>时间</td>
+		          <td>时间</td>
+		        </tr>
+		      </table>
+		  </div>
+		  <div id="voteresultct" class="content">
+		    <table>
+		        <tr>
+		          <td>结果</td>
+		          <td>1</td>
+		          <td>2</td>
+		        </tr>
+		      </table>
+		  </div>
+		  <div id="voteannouncect" class="content">
+		    <table>
+		        <tr>
+		          <td>announce</td>
+		          <td>1</td>
+		          <td>2</td>
+		        </tr>
+		      </table>
+		  </div>
+		  <div id="votelogicct" class="content">
+		    <table>
+		        <tr>
+		          <td>logic</td>
+		          <td>1</td>
+		          <td>2</td>
+		        </tr>
+		      </table>
+		  </div>
+		</div>
 		<div class="buttom">copyright@starstudio</div>
 		<script type="text/javascript" src="link.js"></script>
 	</body>
