@@ -38,5 +38,39 @@ h2 {
 }
 
 li {
+	font-size: 15px;
+	margin-top: 10px;
+	width: 120px; 
 	list-style-type: none;
+}
+
+#customcontent, #candidatecontent, #votetimect, #voteresultct, #voteannouncect, #votelogicct {
+	
+	display: none;
+}
+
+button {
+	margin: 50px 20px 10px 50px;
+	height: 30px;
+	font-size: 20px;
+	color: white;
+	border: 1px solid #3385ff;
+	background-color: #3385ff; 
+}
+
+table {
+	margin: 50px;
+	border-collapse: collapse;
+}
+
+thead {
+	text-align: center;
+	background-color: #eee;
+}
+
+td {
+	width: 150px;
+	height: 25px;
+	text-align: center;
+	border: 1px solid #eee; 
 }
