@@ -11,20 +11,28 @@ h2 {
 	padding: auto;
 }
 
-.left .content {
+.leftcontent {
 	background-color: #eee;
 }
 
 
 .list {
   display: none;
+  background-color: #eee;
+}
+
+.leftcontent td {
+	background-color: #fff;
 }
 
 .right {
 	width: 58%;
 	height: 500px;
+	float: right;
 	margin-left: 10px;
-	overflow:scroll
+	/*
+	 overflow: scroll;
+	*/
 }
 
 .buttom {
@@ -44,9 +52,12 @@ li {
 	list-style-type: none;
 }
 
-#customcontent, #candidatecontent, #votetimect, #voteresultct, #voteannouncect, #votelogicct {
-	
+.content {	
 	display: none;
+}
+
+.content-on {	
+	display: block;
 }
 
 button {
