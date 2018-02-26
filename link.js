@@ -25,61 +25,108 @@ vote[0].onclick = function () {
 
 var lefttd = document.getElementById('vote');
 var leftlist = document.querySelectorAll('.list');
+var span1 = document.getElementById('span1');
 lefttd.onclick = function () {
 	for (var i = 0; i<leftlist.length; i++) {
 		leftlist[i].style.display = "block";
 	}
+	span1.innerHTML = "";
 };
+
+//点击左边后右边出现的效果
+var leftlists = document.querySelectorAll('.leftlists');
+var rightcontent = document.querySelectorAll('.content');
+leftlists.forEach(function (val, index) {
+	leftlists[index].onclick = function () {
+		for (var i=0; i<rightcontent.length; i++) {
+			rightcontent[i].classList.remove('content-on');
+		}
+		rightcontent[index].classList.add('content-on');
+	}
+});
+
+
+
 //添加投票用户
 //显示投票用户
 //删除投票用户
-var accountcontent = document.getElementById('customcontent');
-var account = document.getElementById('account');
-account.onclick = function () {
-	document.getElementById('right').style.display = "none";
-	accountcontent.style.display = "block";
-}
-var xmlhttp2 = new XMLHttpRequest();
+var customcontent = document.getElementById('customcontent');
+var excel = document.getElementById('exc');
+var addalone = document.getElementById('alone');
+
+var xmlhttp2Add = new XMLHttpRequest();
 xmlhttp2.open("POST", "admin/addcommon", true);
+
+
+
+
+
+var xmlhttp2Show = new XMLHttpRequest();
+xmlhttp2.open("POST", "admin/showcommon?page=1", true);
+
+
+
+
+
+var xmlhttp2Delete= new XMLHttpRequest();
+xmlhttp2.open("POST", "admin/delcommon", true);
+
+
+
+
 
 //添加候选人
 //删除候选人
-var candidatecontent = document.getElementById('candidatecontent');
-var candidate = document.getElementById('candidate');
-candidate.onclick = function () {
-	candidatecontent.style.display = "block";
-}
-var xmlhttp2 = new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/addcommon", true);
+var xmlhttp3Add = new XMLHttpRequest();
+xmlhttp2.open("POST", "admin/addcandidate", true);
+
+
+
+var xmlhttp3Delete = new XMLHttpRequest();
+xmlhttp2.open("POST", "admin/delcandidate", true);
+
+
+
 
 //设置投票开始和结束状态
 //获取投票开始和结束状态
 //某一位候选人的投票日志
-var votetimect = document.getElementById('votetimect');
-var votetime = document.getElementById('votetime');
-votetime.onclick = function () {
-	votetimect.style.display = "block";
-}
-var xmlhttp2 = new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/addcommon", true);
+var xmlhttp4status1 = new XMLHttpRequest();
+xmlhttp2.open("POST", "admin/status", true);
+
+
+
+
+
+var xmlhttp4status2 = new XMLHttpRequest();
+xmlhttp2.open("GET", "admin/getstatus", true);
+
+
+
+
 
 //设置可投的最多票数 post
 //获取可投的最多票数 get
-var accountcontent = document.getElementById('customcontent');
-var account = document.getElementById('account');
-account.onclick = function () {
-	accountcontent.style.display = "block";
-}
-var xmlhttp2 = new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/addcommon", true);
+var xmlhttp5 = new XMLHttpRequest();
+xmlhttp2.open("POST", "admin/status2", true);
+
+
+
+
+
+
+var xmlhttp5 = new XMLHttpRequest();
+xmlhttp2.open("GET", "admin/getstatus2", true);
+
+
+
+//某一位候选人的投票日志
+var xmlhttp6 = new XMLHttpRequest();
+xmlhttp2.open("GET", "admin/record?id=123", true);
+
 
 //投票公告编辑
-var voteannouncect = document.getElementById('voteannouncect');
-var voteannounce = document.getElementById('voteannounce');
-voteannounce.onclick = function () {
-	accountcontent.style.display = "block";
-}
-var xmlhttp2 = new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/addcommon", true);
+var xmlhttp7= new XMLHttpRequest();
+xmlhttp2.open("POST", "admin/setpublic", true);
 
 
