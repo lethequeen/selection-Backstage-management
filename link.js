@@ -51,25 +51,89 @@ leftlists.forEach(function (val, index) {
 //显示投票用户
 //删除投票用户
 var customcontent = document.getElementById('customcontent');
+var right = document.getElementById('right');
 var excel = document.getElementById('exc');
 var addalone = document.getElementById('alone');
+console.log(addalone);
+addalone.onclick = function () {
+	var divbox = document.createElement("div");
+	divbox.className = "divbox";
+	right.appendChild(divbox);
+  divbox.innerHTML = '<div>'
+  +'<div class="topdiv">添加投票用户</div>'
+  +'<div class="inputtext"><label>姓名</label><input type="text" id="customname"></div>'
+  +'<div class="inputtext"><label>密码</label><input type="text" id="custommima"></div>'
+  +'<input type="submit" id="ok" value="确定">'
+  +'<input type="submit" id="cancel" value="取消">'
+  '</div>';
+	var customname = document.getElementById('customname');
+	var custommima = document.getElementById('custommima');
+	var ok = document.getElementById('ok');
+	var cancel = document.getElementById('cancel');
+	function deletediv () {
+	  var divbox = document.getElementsByClassName('divbox')[0];
+	  right.removeChild(divbox);
+	}
+	cancel.onclick = function () {
+		deletediv ();
+	}
+	ok.onclick = function() {
+		deletediv ();
+		var formdata = new FormData();
+		formdata.append("name", customname.value);
+		formdata.append("password", custommima.value);
+		var xml = new XMLHttpRequest();
+		xml.open("POST", "admin/addcommon", true);
+		xml.onreadystatechange = function () {
+		  if (exceladd.readyState == 4 && exceladd.status == 200) {
+		  	var text = JSON.parse(xml.responseText);
+		  	if (errcode == 1) {
+        	showcustom();
+          deletcustom();
+        }
+        if (errcode == 101) {
+        	alert(text.errmsg);
+        }
+		  }
+	  }
+	  xml.send(formdata);
+  }
 
-var xmlhttp2Add = new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/addcommon", true);
+  function showcustom () {
+  	var formdata1 = new FormData();
+  	var xml1 = 
+  }
+
+  function detetcustom () {}
+}
+
+
+
+
+var exceladd = new XMLHttpRequest();
+	exceladd.open("POST", "admin/addcommon", true);
+	exceladd.onreadystatechange = function () {
+		if (exceladd.readyState == 4 && exceladd.status == 200) {}
+	}
+
+
+
+
+
 
 
 
 
 
 var xmlhttp2Show = new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/showcommon?page=1", true);
+xmlhttp2Show.open("POST", "admin/showcommon?page=1", true);
 
 
 
 
 
 var xmlhttp2Delete= new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/delcommon", true);
+xmlhttp2Delete.open("POST", "admin/delcommon", true);
 
 
 
@@ -77,13 +141,6 @@ xmlhttp2.open("POST", "admin/delcommon", true);
 
 //添加候选人
 //删除候选人
-var xmlhttp3Add = new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/addcandidate", true);
-
-
-
-var xmlhttp3Delete = new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/delcandidate", true);
 
 
 
@@ -91,15 +148,6 @@ xmlhttp2.open("POST", "admin/delcandidate", true);
 //设置投票开始和结束状态
 //获取投票开始和结束状态
 //某一位候选人的投票日志
-var xmlhttp4status1 = new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/status", true);
-
-
-
-
-
-var xmlhttp4status2 = new XMLHttpRequest();
-xmlhttp2.open("GET", "admin/getstatus", true);
 
 
 
@@ -107,26 +155,19 @@ xmlhttp2.open("GET", "admin/getstatus", true);
 
 //设置可投的最多票数 post
 //获取可投的最多票数 get
-var xmlhttp5 = new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/status2", true);
 
 
 
 
 
 
-var xmlhttp5 = new XMLHttpRequest();
-xmlhttp2.open("GET", "admin/getstatus2", true);
+
 
 
 
 //某一位候选人的投票日志
-var xmlhttp6 = new XMLHttpRequest();
-xmlhttp2.open("GET", "admin/record?id=123", true);
 
 
 //投票公告编辑
-var xmlhttp7= new XMLHttpRequest();
-xmlhttp2.open("POST", "admin/setpublic", true);
 
 
