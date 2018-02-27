@@ -13,6 +13,7 @@ h2 {
 
 .leftcontent {
 	background-color: #eee;
+	padding-left: 50px;
 }
 
 
@@ -22,6 +23,7 @@ h2 {
 }
 
 .leftcontent td {
+	padding-left: 50px;
 	background-color: #fff;
 }
 
@@ -33,6 +35,10 @@ h2 {
 	/*
 	 overflow: scroll;
 	*/
+}
+
+span {
+	float: right;
 }
 
 .buttom {
@@ -85,3 +91,47 @@ td {
 	text-align: center;
 	border: 1px solid #eee; 
 }
+
+.divbox {
+	width: 300px;
+	height: 230px;
+	background-color: #b2b2b2;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	z-index: 2;
+}
+
+.topdiv {
+	width: 200px;
+	height: 20px;
+	font-size: 30px;
+	margin: 20px 50px;
+	padding-bottom: 20px;
+}
+
+.inputtext {
+	width: 250px;
+	height: 20px;
+	margin-left: 40px;
+	margin-top: 20px;
+}
+
+#ok {
+  width: 60px;
+  height: 30px;
+  float: left;
+  background-color: #3385ff; 
+  margin-left: 50px;
+  margin-top: 30px;
+}
+
+#cancel {
+  width: 60px;
+  height: 30px;
+  float: right;
+  margin-right: 50px;
+  margin-top: 30px;
+  background-color: #3385ff;
+}
+
