@@ -85,13 +85,13 @@ addalone.onclick = function () {
 		var xml = new XMLHttpRequest();
 		xml.open("POST", "admin/addcommon", true);
 		xml.onreadystatechange = function () {
-		  if (exceladd.readyState == 4 && exceladd.status == 200) {
+		  if (xml.readyState == 4 && xml.status == 200) {
 		  	var text = JSON.parse(xml.responseText);
-		  	if (errcode == 1) {
+		  	if (text.errcode == 1) {
         	showcustom();
           deletcustom();
         }
-        if (errcode == 101) {
+        if (text.errcode == 101) {
         	alert(text.errmsg);
         }
 		  }
@@ -99,52 +99,95 @@ addalone.onclick = function () {
 	  xml.send(formdata);
   }
 
+  var customtable = document.getElementById('customtable');
   function showcustom () {
-  	var formdata1 = new FormData();
-  	var xml1 = 
+  	var xmlShow = new XMLHttpRequest();
+    xmlShow.open("POST", "admin/showcommon?page=1", true);
+    xmlShow.onreadyStateChange = function () {
+    	if (xmlShow.readyState == 4 && xmlShow.status == 200) {
+    		var showtext = JSON.parse(xmlShow.responseText);
+    		if (showtext.errcode == 0) {
+  	      var common = showtext.common;
+  	      for (var i=0; i<common.length; i++) {
+  	      	var tr1 = document.createElement("tr");
+  	      	tr1.className = "customtr";
+  	      	tr1.innerHTML = '<td class="namemsg">'+common[i].value+'</td>'
+								  	      	+'<td>'
+								  	      	+'<input class="customcancel" type="submit" value="删除">'
+								  	      	+'</td>';
+            customtable.appendChild(tr1);
+  	      }     
+    		}
+    	}
+    }
+    xmlShow.send(null);
   }
 
-  function detetcustom () {}
+  function detetcustom () {
+  	var deleteform = new FormData();
+  	var xmlDelete = new XMLHttpRequest();
+    xmlDelete.open("POST", "admin/delcommon", true);
+    xmlDelete.onreadyStateChange = function () {
+    	if (xmlDelete.readystate == 4 && xmlDelete.status == 200) {
+    		var delettext = JSON.parse(xmlDelete.responseText);
+    		if (delettext.errcode == 0) {
+    			var namemsgs = document.querySelectorAll('.namemsg');
+    			var customtrs = document.querySelectorAll('.customtr');
+    			var customcancels = document.querySelectorAll('.customcancel');
+    			customcancels.forEach(function (val, index) {
+    				customcancels[index].onclick = function () {
+    					deleteform.append("name", namemsgs[index].value);
+              customtable.removeChild(customtrs[index]);
+    				}
+    			});
+    		}
+    		if (delettext.errcode == 101) {
+    			alert(text.errmsg);
+    		}
+    		if (delettext.errcode == 102) {
+    			alert(text.errmsg);
+    		}
+    	}
+    }
+    deleteform.send(deleteform); 
+  }
 }
-
-
-
-
-var exceladd = new XMLHttpRequest();
-	exceladd.open("POST", "admin/addcommon", true);
-	exceladd.onreadystatechange = function () {
-		if (exceladd.readyState == 4 && exceladd.status == 200) {}
-	}
-
-
-
-
-
-
-
-
-
-
-var xmlhttp2Show = new XMLHttpRequest();
-xmlhttp2Show.open("POST", "admin/showcommon?page=1", true);
-
-
-
-
-
-var xmlhttp2Delete= new XMLHttpRequest();
-xmlhttp2Delete.open("POST", "admin/delcommon", true);
-
 
 
 
 
 //添加候选人
 //删除候选人
+var candidate = document.getElementById('candidatemsg');
+candidate.onclick = function () {
+  var divbox1 = document.createElement('div');
+  divbox1.className="candidateaddbox";
+  right.appendChild(divbox1);
+  divbox1.innerHTML = '<div>'
+  +'<div class="inputtext1"><label>姓名：</label><input type="text" id="candidatename"></div>'
+  +'<div class="inputtext1"><label>描述：</label><input type="text" id="candidatedescribe"></div>'
+  +'<div class="inputbotton"><label>添加选手照片：</label><input type="submit" value="+" id="candidatecover"></div>'
+  +'<input type="submit" id="candidateok" value="确定">'
+  +'<input type="submit" id="candidatecancel" value="取消">'
+  '</div>';
+  var candidatename = document.getElementById('candidatename');
+  var candidatedescribe = document.getElementById('candidatedescribe');
+  var candidatecover = document.getElementById('candidatecover');
+  var candidateok = document.getElementById('candidateok');
+  var candidatecancel = document.getElementById('candidatecancel');
+  function deletedivbox1 () {
+	  var candidateaddbox = document.getElementsByClassName('candidateaddbox')[0];
+	  right.removeChild(candidateaddbox);
+	}
+	candidatecancel.onclick = function () {
+		deletedivbox1 ();
+	}
+	candidateok.onclick = function () {
+		deletedivbox1 ();
+	}
+}
 
-
-
-
+///////////////////////投票时间段设置
 //设置投票开始和结束状态
 //获取投票开始和结束状态
 //某一位候选人的投票日志
@@ -152,22 +195,15 @@ xmlhttp2Delete.open("POST", "admin/delcommon", true);
 
 
 
-
+///////////////////////投票逻辑设置，常用规则举例    - 每天/整个投票期间- 投一票/投多票
 //设置可投的最多票数 post
 //获取可投的最多票数 get
 
 
-
-
-
-
-
-
-
-
+///////////////////////投票结果展示（可以查看每个候选人的票数以及对应的投票人，也就是有投票日志的功能）
 //某一位候选人的投票日志
 
-
+///////////////////////投票公告编辑
 //投票公告编辑
 
 
