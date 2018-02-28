@@ -135,3 +135,11 @@ td {
   background-color: #3385ff;
 }
 
+.candidateaddbox {
+	width: 500px;
+  height: 500px;
+  position: relative;
+  left: 0px;
+  top: 0px;
+}
+
