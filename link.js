@@ -122,50 +122,51 @@ addalone.onclick = function () {
     }
     xmlShow.send(null);
   }
-
+}
   function detetcustom () {
-  	var deleteform = new FormData();
-  	var xmlDelete = new XMLHttpRequest();
+    var deleteform = new FormData();
+    var xmlDelete = new XMLHttpRequest();
     xmlDelete.open("POST", "admin/delcommon", true);
     xmlDelete.onreadyStateChange = function () {
-    	if (xmlDelete.readystate == 4 && xmlDelete.status == 200) {
-    		var delettext = JSON.parse(xmlDelete.responseText);
-    		if (delettext.errcode == 0) {
-    			var namemsgs = document.querySelectorAll('.namemsg');
-    			var customtrs = document.querySelectorAll('.customtr');
-    			var customcancels = document.querySelectorAll('.customcancel');
-    			customcancels.forEach(function (val, index) {
-    				customcancels[index].onclick = function () {
-    					deleteform.append("name", namemsgs[index].value);
+      if (xmlDelete.readystate == 4 && xmlDelete.status == 200) {
+        var delettext = JSON.parse(xmlDelete.responseText);
+        if (delettext.errcode == 0) {
+          var namemsgs = document.querySelectorAll('.namemsg');
+          var customtrs = document.querySelectorAll('.customtr');
+          var customcancels = document.querySelectorAll('.customcancel');
+          customcancels.forEach(function (val, index) {
+            customcancels[index].onclick = function () {
+              deleteform.append("name", namemsgs[index].value);
               customtable.removeChild(customtrs[index]);
-    				}
-    			});
-    		}
-    		if (delettext.errcode == 101) {
-    			alert(text.errmsg);
-    		}
-    		if (delettext.errcode == 102) {
-    			alert(text.errmsg);
-    		}
-    	}
+            }
+          });
+        }
+        if (delettext.errcode == 101) {
+          alert(text.errmsg);
+        }
+        if (delettext.errcode == 102) {
+          alert(text.errmsg);
+        }
+      }
     }
-    deleteform.send(deleteform); 
-  }
-}
-
+    xmlDelete.send(deleteform); 
+  };
+detetcustom ();
 
 
 
 //添加候选人
 //删除候选人
 var candidate = document.getElementById('candidatemsg');
+var candidatetable = document.getElementById('candidatetable');
 candidate.onclick = function () {
   var divbox1 = document.createElement('div');
   divbox1.className="candidateaddbox";
   right.appendChild(divbox1);
   divbox1.innerHTML = '<div>'
+  +'<div class="candidatetop">添加候选人信息</div>'
   +'<div class="inputtext1"><label>姓名：</label><input type="text" id="candidatename"></div>'
-  +'<div class="inputtext1"><label>描述：</label><input type="text" id="candidatedescribe"></div>'
+  +'<div class="inputtext1"><label>描述：</label><textarea id="candidatedescribe"></textarea></div>'
   +'<div class="inputbotton"><label>添加选手照片：</label><input type="submit" value="+" id="candidatecover"></div>'
   +'<input type="submit" id="candidateok" value="确定">'
   +'<input type="submit" id="candidatecancel" value="取消">'
@@ -184,13 +185,60 @@ candidate.onclick = function () {
 	}
 	candidateok.onclick = function () {
 		deletedivbox1 ();
+    var formdata1 = new FormData();
+    formdata1.append("name", candidatename.value);
+    formdata1.append("describe", candidatedescribe.value);
+    formdata1.append("cover", candidatecover.value);
+    var candidatexml = new XMLHttpRequest();
+    candidatexml.open("POST", "admin/addcommon", true);
+    candidatexml.onreadystatechange = function () {
+      if (candidatexml.readyState == 4 && candidatexml.status == 200) {
+        var text = JSON.parse(xml.responseText);
+        if (text.errcode == 1) {
+          var tr2 = document.createElement('tr');
+          tr2.className = "candidatetr";
+          tr2.innerHTML = '<td class="addcandidatename">'+candidatename.value+'</td>'
+                          + '<td class="addcandidatedes">'+candidatedescribe.value+'</td>'
+                          +'<td>'
+                          +'<input class="addcandidatecancel" type="submit" value="删除">'
+                          +'</td>';
+          candidatetable.appendChild(tr2);
+          deletecandidate();
+        }
+      }
+    }
+    candidatexml.send(formdata1);
 	}
 }
 
+function deletecandidate () {
+  var deletecandidateform = new FormData();
+  var deletecandidatexml = new XMLHttpRequest();
+  deletecandidatexml.open("POST", "admin/delcandidate", true);
+  deletecandidatexml.onreadystateChange = function () {
+    if (deletecandidatexml.readystate == 4 && deletecandidatexml.status == 200) {
+      var text = JSON.parse(deletecandidatexml.responseText);
+      if (text.errcode == 0) {
+        var candidatetr = document.querySelectorAll('.candidatetr');
+        var addcandidatecancel = document.querySelectorAll('.addcandidatecancel');
+        addcandidatecancel.forEach(function (val, index) {
+          addcandidatecancel[index].onclick = function () {
+            deletecandidateform.append("id", index);
+            candidatetable.removeChild(candidatetr[index]);
+          }
+        });
+      }
+      if (text.errcode == 101) {
+        alert(text.errmsg);
+      }
+    }
+  }
+  deletecandidatexml.send(deletecandidateform);
+}
+deletecandidate();
 ///////////////////////投票时间段设置
 //设置投票开始和结束状态
 //获取投票开始和结束状态
-//某一位候选人的投票日志
 
 
 
