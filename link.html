@@ -50,7 +50,7 @@
 		  </div>
 		  <div id="candidatecontent" class="content">
 		    <button id="candidatemsg">添加候选人/物信息</button>
-		    <table>
+		    <table id="candidatetable">
 		        <thead>
 		          <td>姓名</td>
 		          <td>信息</td>
@@ -66,15 +66,12 @@
 		  <div id="votetimect" class="content">
 		    <table>
 		        <thead>
-		          <td>时间</td>
-		          <td>时间</td>
-		          <td>时间</td>
+		          <td>答辩现场时间开关：</td>
+		          <td><Radio value="unstart">未开始</Radio></td>
+		          <td><Radio value="start">已开始</Radio></td>
+		          <td><Radio value="end">已结束</Radio></td>
+		          <td><Button type="primary">清空评分数据</Button></td>
 		        </thead>
-		        <tr>
-		          <td>时间</td>
-		          <td>时间</td>
-		          <td>时间</td>
-		        </tr>
 		      </table>
 		  </div>
 		  <div id="voteresultct" class="content">
