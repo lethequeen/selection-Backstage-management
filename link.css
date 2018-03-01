@@ -1,6 +1,6 @@
 .left {
 	width: 40%;
-	height: 500px;
+	height: 800px;
 	float: left;
 }
 
@@ -29,7 +29,7 @@ h2 {
 
 .right {
 	width: 58%;
-	height: 500px;
+	height: 800px;
 	float: right;
 	margin-left: 10px;
 	/*
@@ -136,10 +136,74 @@ td {
 }
 
 .candidateaddbox {
-	width: 500px;
-  height: 500px;
-  position: relative;
-  left: 0px;
-  top: 0px;
+	width: 600px;
+  height: 700px;
+  background-color: #b2b2b2;
+  position: absolute;
+  left: 40%;
+  top: 30px;
 }
 
+.candidatetop {
+	width: 300px;
+	height: 20px;
+	font-size: 30px;
+	margin: 20px 200px;
+	padding-bottom: 20px;
+}
+
+.inputtext1 {
+	width: 500px;
+	height: 20px;
+	font-size: 20px;
+	margin-left: 100px;
+	margin-top: 50px;
+}
+
+.inputtext1 input {
+	width: 300px;
+	height: 30px;
+}
+
+#candidatedescribe {
+	width: 300px;
+	height: 200px;
+}
+
+#candidateok {
+  width: 60px;
+  height: 30px;
+  float: left;
+  background-color: #3385ff; 
+  margin-left: 150px;
+  margin-top: 120px;
+}
+
+#candidatecancel {
+  width: 60px;
+  height: 30px;
+  float: right;
+  margin-right: 150px;
+  margin-top: 120px;
+  background-color: #3385ff;
+}
+
+.inputbotton {
+	width: 500px;
+	height: 50px;
+	margin-left: 100px;
+	margin-top: 250px;
+}
+
+.inputbotton label {
+	font-size: 20px;
+}
+
+#candidatecover {
+	width: 100px;
+	height: 100px;
+  font-size: 50px;
+  background-color: white;
+  border: 1px dashed black;
+  margin-left: 50px;
+}
