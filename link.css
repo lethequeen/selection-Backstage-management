@@ -207,3 +207,32 @@ td {
   border: 1px dashed black;
   margin-left: 50px;
 }
+
+#votetimect td {
+	width: 400px;
+	height: 30px;
+	border: none;
+	margin-top: 100px;
+}
+
+#votetimect input {
+	border: 10px solid #3385ff;
+	background-color: #3385ff;
+}
+
+.kaiguan {
+	font-weight: bold;
+	width: 350px;
+	height: 30px;
+}
+
+#votelogicct {
+	margin-top: 100px;
+	margin-left: 100px;
+}
+
+#votelogicct select {
+	vertical-align: center;
+	width: 150px;
+	height: 30px;
+}
