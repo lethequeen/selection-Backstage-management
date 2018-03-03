@@ -65,26 +65,22 @@
 		  </div>
 		  <div id="votetimect" class="content">
 		    <table>
-		        <thead>
-		          <td>答辩现场时间开关：</td>
-		          <td><Radio value="unstart">未开始</Radio></td>
-		          <td><Radio value="start">已开始</Radio></td>
-		          <td><Radio value="end">已结束</Radio></td>
-		          <td><Button type="primary">清空评分数据</Button></td>
-		        </thead>
+		        <tr>
+		          <td class="kaiguan">答辩现场开关：</td>
+		          <td><label>开始</label><input class="radiostatus" type="radio" value="start" id="radiostart"></td>
+		          <td><label>结束</label><input class="radiostatus" type="radio" value="end" id="radioend"></td>
+		        </tr>
 		      </table>
 		  </div>
 		  <div id="voteresultct" class="content">
 		    <table>
 		        <thead>
-		          <td>结果</td>
-		          <td>1</td>
-		          <td>2</td>
+		          <td>姓名</td>
+		          <td>对应的投票人</td>
 		        </thead>
 		        <tr>
-		          <td>结果</td>
+		          <td>result</td>
 		          <td>1</td>
-		          <td>2</td>
 		        </tr>
 		      </table>
 		  </div>
@@ -103,18 +99,19 @@
 		      </table>
 		  </div>
 		  <div id="votelogicct" class="content">
-		    <table>
-		        <thead>
-		          <td>logic</td>
-		          <td>1</td>
-		          <td>2</td>
-		        </thead>
-		        <tr>
-		          <td>logic</td>
-		          <td>1</td>
-		          <td>2</td>
-		        </tr>
-		      </table>
+		    <h4>设置可投的最多票数：</h4>
+		    <select id="number">
+		      <option selected="selected">1</option>
+		      <option>2</option>
+		      <option>3</option>
+		      <option>4</option>
+		      <option>5</option>
+		      <option>6</option>
+		      <option>7</option>
+		      <option>8</option>
+		      <option>9</option>
+		      <option>10</option>
+		    </select>
 		  </div>
 		</div>
 		<div class="buttom">copyright@starstudio</div>
