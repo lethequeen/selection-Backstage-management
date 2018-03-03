@@ -80,8 +80,8 @@ addalone.onclick = function () {
 	ok.onclick = function() {
 		deletediv ();
 		var formdata = new FormData();
-		formdata.append("name", customname.value);
-		formdata.append("password", custommima.value);
+		formdata.append("name", JSON.stringify(customname.value));
+		formdata.append("password", JSON.stringify(custommima.value));
 		var xml = new XMLHttpRequest();
 		xml.open("POST", "admin/addcommon", true);
 		xml.onreadystatechange = function () {
@@ -136,7 +136,7 @@ addalone.onclick = function () {
           var customcancels = document.querySelectorAll('.customcancel');
           customcancels.forEach(function (val, index) {
             customcancels[index].onclick = function () {
-              deleteform.append("name", namemsgs[index].value);
+              deleteform.append("name", JSON.stringify(namemsgs[index].value));
               customtable.removeChild(customtrs[index]);
             }
           });
@@ -186,7 +186,7 @@ candidate.onclick = function () {
 	candidateok.onclick = function () {
 		deletedivbox1 ();
     var formdata1 = new FormData();
-    formdata1.append("name", candidatename.value);
+    formdata1.append("name", JSON.stringify(candidatename.value));
     formdata1.append("describe", candidatedescribe.value);
     formdata1.append("cover", candidatecover.value);
     var candidatexml = new XMLHttpRequest();
@@ -223,7 +223,7 @@ function deletecandidate () {
         var addcandidatecancel = document.querySelectorAll('.addcandidatecancel');
         addcandidatecancel.forEach(function (val, index) {
           addcandidatecancel[index].onclick = function () {
-            deletecandidateform.append("id", index);
+            deletecandidateform.append("id", JSON.stringify(index));
             candidatetable.removeChild(candidatetr[index]);
           }
         });
@@ -239,17 +239,100 @@ deletecandidate();
 ///////////////////////投票时间段设置
 //设置投票开始和结束状态
 //获取投票开始和结束状态
+var radiostart = document.getElementById('radiostart');
+var radioend = document.getElementById('radioend');
+var radiostatus = document.querySelectorAll('.radiostatus');
+var statusxml = new XMLHttpRequest();
+var statusform = new FormData();
+statusxml.open("POST", "admin/status", true);
+statusxml.onreadyStateChange = function () {
+  if (statusxml.readystate == 4 && statusxml.status ==4) {
+    var text = JSON.parse(statusxml.responseText);
+    if (text.errcode == 0) {
+      radiostatus.forEach(function (val, index) {
+        radiostatus[index].onclick = function () {
+          for (var i=0; i<radiostatus.length; i++) {
+            radiostatus[i].style.cheched = "";
+          }
+          radiostatus[index].style.checked = "checked";
+          statusform.append("status", "JSON.stringify(radiostatus[index].value)")
+        }
+      });
+    }
+  }
+}
+statusxml.send(statusform);
 
-
-
+window.onload = function () {
+  var getstatexml = new XMLHttpRequest();
+  getstatexml.open("GET", "admin/getstatus", true);
+  getstatexml.onreadystatechange = function () {
+    if (getstatexml.readystate == 4 && getstatexml.status ==4) {
+      var text = JSON.parse(getstatexml.responseText);
+      if (text.errcode == 0) {
+        if (text.status == "start") {
+          radiostatus[1].style.cheched = "checked";
+        } else {
+          radiostatus[2].style.cheched = "checked";
+        }
+      }
+    }
+  }
+}
 
 ///////////////////////投票逻辑设置，常用规则举例    - 每天/整个投票期间- 投一票/投多票
 //设置可投的最多票数 post
 //获取可投的最多票数 get
+var number = document.getElementById('number');
+var numxml = new XMLHttpRequest();
+var numform = new FormData();
+numxml.open("POST", "admin/status2", true);
+numxml.onreadyStateChange = function () {
+  if (numxml.readystate == 4 && numxml.status ==4) {
+    var text = JSON.parse(numxml.responseText);
+    if (text.errcode == 0) {
+      numform.append("status2",JSON.stringify(number.value));
+    }
+  }
+}
+numxml.send(numform);
+window.onload = function () {
+  var numxml1 = new XMLHttpRequest();
+  numxml1.open("POST", "admin/status2", true);
+  numxml1.onreadyStateChange = function () {
+    if (numxml1.readystate == 4 && numxml1.status ==4) {
+      var text = JSON.parse(numxml1.responseText);
+      if (text.errcode == 0) {
+        number.innerText = text.status2;
+      }
+    }
+  }
+  numxml1.send(null);
+}
 
 
 ///////////////////////投票结果展示（可以查看每个候选人的票数以及对应的投票人，也就是有投票日志的功能）
 //某一位候选人的投票日志
+var voteresultct = document.getElementById('voteresultct');
+var resultxml = new XMLHttpRequest();
+resultxml.open("GET", "admin/record?id=123", true);
+resultxml.onreadyStateChange = function () {
+    if (resultxml.readystate == 4 && resultxml.status ==4) {
+      var text = JSON.parse(resultxml.responseText);
+      if (text.errcode == 0) {
+        var resulttr = document.createElement('tr');
+        voteresultct.appendChild(resulttr);
+        var resulttd = document.createElement('td');
+        voteresultct.appendChild(resulttd);
+        resulttr.innerHTML = '<td>'+text.name+'</td>'+resulttd;
+        var resultinfo = text.info;
+        for (var j=0; j<resultinfo.length; j++) {
+          resulttd.innerHTML += ('<tr>'+resultinfo.name+'</tr>'+'<tr>'+resultinfo.time+'</tr>')
+        } 
+      }
+    }
+  }
+resultxml.send(null);
 
 ///////////////////////投票公告编辑
 //投票公告编辑
