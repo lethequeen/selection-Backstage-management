@@ -47,6 +47,11 @@ leftlists.forEach(function (val, index) {
 
 
 
+
+
+
+
+
 //添加投票用户
 //显示投票用户
 //删除投票用户
@@ -152,6 +157,10 @@ addalone.onclick = function () {
     xmlDelete.send(deleteform); 
   };
 detetcustom ();
+
+
+
+
 
 
 
@@ -280,6 +289,10 @@ window.onload = function () {
   }
 }
 
+
+
+
+
 ///////////////////////投票逻辑设置，常用规则举例    - 每天/整个投票期间- 投一票/投多票
 //设置可投的最多票数 post
 //获取可投的最多票数 get
@@ -311,6 +324,9 @@ window.onload = function () {
 }
 
 
+
+
+
 ///////////////////////投票结果展示（可以查看每个候选人的票数以及对应的投票人，也就是有投票日志的功能）
 //某一位候选人的投票日志
 var voteresultct = document.getElementById('voteresultct');
@@ -334,7 +350,39 @@ resultxml.onreadyStateChange = function () {
   }
 resultxml.send(null);
 
+
+
+
+
 ///////////////////////投票公告编辑
 //投票公告编辑
 
 
+var candidateannounce = document.getElementById('candidateannounce');
+var announcexml = new XMLHttpRequest();
+var announceform = new FormData();
+announcexml.open("POST", "admin/setpublic", true);
+announcexml.onreadystatechange = function () {
+  if(announcexml.readystate == 4 && announcexml.status == 200) {
+    var text = JSON.parse(announcexml.responseText);
+    if (text.errcode == 0) {
+      announceform.append("announce", JSON.stringify(candidateannounce.innerText));
+    }
+  }
+}
+announcexml.send(announceform);
+
+window.onload = function () {
+  var getxml = new XMLHttpRequest();
+  getxml.open("POST", "admin/getpublic", true);
+  getxml.onreadyStateChange = function () {
+    if (getxml.readystate == 200 && getxml.status == 4) {
+      var text = JSON.parse(getxml.responseText);
+      if (text.errcode == 0) {
+        candidateannounce.innerText = text.announce;
+      } else if (text.errcode == 101) {
+        alert (text.errmsg);
+      }
+    }
+  }
+}
